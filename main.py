@@ -3,6 +3,7 @@ from typing_extensions import Annotated
 from fastapi.requests import Request
 from Factories.route_factory import RouteFactory
 from pydantic import BaseModel, Base64Bytes
+from Interfaces.postgres_connection import PostgresClient
 
 app = FastAPI()
 
@@ -25,10 +26,14 @@ async def handle_route(route_endpoint, request_body: ParsingDependency):
     route_handler = RouteFactory.get_handler(route_endpoint, request_body)
     return route_handler.results
 
+@app.on_event('startup')
+async def startup():
+    # app.state.psql_client = PostgresClient('back_yard', 'lukemason', 'Lukrative11!')
+    pass
 
 if __name__ == '__main__':
-    from Interfaces.cassandra_connection import CDB
-    cdb = CDB()
-    rows = cdb.execute_generic_command("SELECT * FROM backyard_dev.jobs;")
+    from Interfaces.postgres_connection import PostgresClient
+    psql_client = PostgresClient('db_name', 'username', 'password')
+    rows = psql_client.execute_postgres("SELECT * FROM table;")
     for row in rows:
         print(row)
