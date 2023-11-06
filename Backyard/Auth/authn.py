@@ -4,10 +4,9 @@ Firebase Authentication integration.
 
 import json
 from http import HTTPStatus
-from typing import Optional
 
 from fastapi import Depends, HTTPException, Request
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2, SecurityScopes
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, SecurityScopes
 from firebase_admin import auth
 
 from ..conf import settings
