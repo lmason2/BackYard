@@ -1,5 +1,5 @@
 """
-Firebase and Auth0 Authentication integration.
+Firebase Authentication integration.
 """
 
 import json
