@@ -1,4 +1,5 @@
 
+import uuid
 import psycopg2
 
 class PostgresClient:
@@ -6,16 +7,16 @@ class PostgresClient:
     def __init__(self, p_db_name, p_user, p_pass) -> None:
         self.client = psycopg2.connect("dbname=" + p_db_name + " user=" + p_user + " password=" + p_pass)
 
-    def insert_postgress(self, query, record):
+    def insert_postgress(self, query):
         try:
             print('executing')
             print(query)
-            print(record)
             # create a cursor
             cur = self.client.cursor()
             
             # execute a statement
-            cur.execute(query, record)
+            cur.execute(query)
+            self.client.commit()
             return
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -44,6 +45,5 @@ class PostgresClient:
 
 if __name__ == '__main__':
     psql_client = PostgresClient('back_yard', 'lukemason', 'Lukrative11!')
-    # response = psql_client.execute_postgres('select * from users')
-    response = psql_client.execute_postgres('select * from jobs')
-    print(response)
+    psql_client.insert_postgress(f'''INSERT INTO users(user_id, name, email) 
+                   VALUES ('{uuid.uuid4()}', 'new user', 'new@test.com')''')
