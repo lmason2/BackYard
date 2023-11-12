@@ -9,6 +9,9 @@ from Handlers.RouteHandlers.create_document_handler import CreateDocumentRouteHa
 from Handlers.RouteHandlers.create_event_handler import CreateEventRouteHandler
 from Handlers.RouteHandlers.get_events_by_job_id_handler import GetEventsByJobIdRouteHandler
 from Handlers.RouteHandlers.update_event_handler import UpdateEventRouteHandler
+from Handlers.RouteHandlers.create_invoice_handler import CreateInvoiceRouteHandler
+from Handlers.RouteHandlers.get_invoices_by_job_id_handler import GetInvoicesByJobIdRouteHandler
+from Handlers.RouteHandlers.update_invoice_handler import UpdateInvoiceRouteHandler
 
 ROUTE_MAP = {
     'get-all-jobs': GetAllJobsRouteHandler,
@@ -20,7 +23,10 @@ ROUTE_MAP = {
     'create-document': CreateDocumentRouteHandler,
     'create-event': CreateEventRouteHandler,
     'get-events-by-job-id': GetEventsByJobIdRouteHandler,
-    'update-event': UpdateEventRouteHandler
+    'update-event': UpdateEventRouteHandler,
+    'create-invoice': CreateInvoiceRouteHandler,
+    'get-invoices-by-job-id': GetInvoicesByJobIdRouteHandler,
+    'update-invoice': UpdateInvoiceRouteHandler,
 }
 
 class RouteHandler:
