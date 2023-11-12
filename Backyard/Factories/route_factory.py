@@ -6,6 +6,9 @@ from Handlers.RouteHandlers.create_user_handler import CreateUserRouteHandler
 from Handlers.RouteHandlers.get_job_by_user_id_handler import GetJobByUserIdRouteHandler
 from Handlers.RouteHandlers.get_documents_by_job_id_handler import GetDocumentsByJobIdRouteHandler
 from Handlers.RouteHandlers.create_document_handler import CreateDocumentRouteHandler
+from Handlers.RouteHandlers.create_event_handler import CreateEventRouteHandler
+from Handlers.RouteHandlers.get_events_by_job_id_handler import GetEventsByJobIdRouteHandler
+from Handlers.RouteHandlers.update_event_handler import UpdateEventRouteHandler
 
 ROUTE_MAP = {
     'get-all-jobs': GetAllJobsRouteHandler,
@@ -15,6 +18,9 @@ ROUTE_MAP = {
     'get-job-by-user-id': GetJobByUserIdRouteHandler,
     'get-documents-by-job-id': GetDocumentsByJobIdRouteHandler,
     'create-document': CreateDocumentRouteHandler,
+    'create-event': CreateEventRouteHandler,
+    'get-events-by-job-id': GetEventsByJobIdRouteHandler,
+    'update-event': UpdateEventRouteHandler
 }
 
 class RouteHandler:
