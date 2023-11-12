@@ -11,7 +11,8 @@ class CreateUserRouteHandler(BaseRouteHandler):
         record = f"(\'{user_id}\', \'{name}\', \'{email}\')"
 
         try:
-            self.psql_client.insert_postgress(f'INSERT INTO users (user_id, name, email) VALUES (%s, %s, %s)', record)
+            self.psql_client.insert_postgress(f'''INSERT INTO users(user_id, name, email) 
+                   VALUES ('{user_id}', '{name}', '{email}')''')
             self.results = 'success'
         except Exception as error:
             print(f'erorr retrieving all jobs: {error}')
