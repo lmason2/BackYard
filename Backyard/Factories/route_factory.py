@@ -3,12 +3,14 @@ from Handlers.RouteHandlers.get_all_jobs_handler import GetAllJobsRouteHandler
 from Handlers.RouteHandlers.get_all_users_handler import GetAllUsersRouteHandler
 from Handlers.RouteHandlers.get_roles_for_user import GetRolesForUser
 from Handlers.RouteHandlers.create_user_handler import CreateUserRouteHandler
+from Handlers.RouteHandlers.get_job_by_user_id_handler import GetJobByUserIdRouteHandler
 
 ROUTE_MAP = {
     'get-all-jobs': GetAllJobsRouteHandler,
     'get-all-users': GetAllUsersRouteHandler,
     'get-roles-for-user': GetRolesForUser,
     'create-user': CreateUserRouteHandler,
+    'get-job-by-user-id': GetJobByUserIdRouteHandler
 }
 
 class RouteHandler:
