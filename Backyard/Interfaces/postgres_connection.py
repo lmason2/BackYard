@@ -9,8 +9,7 @@ class PostgresClient:
 
     def insert_postgress(self, query):
         try:
-            print('executing')
-            print(query)
+            print('inserting')
             # create a cursor
             cur = self.client.cursor()
             
@@ -19,13 +18,11 @@ class PostgresClient:
             self.client.commit()
             return
         except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-            return 'error'
+            raise Exception(error)
 
     def execute_postgres(self, query):
         try:
             print('executing')
-            print(query)
             # create a cursor
             cur = self.client.cursor()
             
@@ -36,8 +33,7 @@ class PostgresClient:
                 return results
             return []
         except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-            return 'error'
+            raise Exception(error)
         
     def close_connection(self):
         self.client.close()
