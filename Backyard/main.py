@@ -4,6 +4,7 @@ from fastapi.requests import Request
 from Factories.route_factory import RouteFactory
 from pydantic import BaseModel, Base64Bytes
 from Interfaces.postgres_connection import PostgresClient
+from Interfaces.postgres_orm import PostgresORM
 
 app = FastAPI()
 
@@ -28,8 +29,8 @@ async def handle_route(route_endpoint, request_body: ParsingDependency):
 
 @app.on_event('startup')
 async def startup():
-    # app.state.psql_client = PostgresClient('back_yard', 'lukemason', 'Lukrative11!')
-    pass
+    app.state.psql_client   = PostgresClient('back_yard', 'lukemason', 'Lukrative11!')
+    app.state.psql_orm      = PostgresORM('lukemason', 'Lukrative11!', 'localhost', '5432', 'back_yard')
 
 if __name__ == '__main__':
     from Interfaces.postgres_connection import PostgresClient
