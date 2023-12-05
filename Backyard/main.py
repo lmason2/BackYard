@@ -1,40 +1,55 @@
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, Security
 from typing_extensions import Annotated
 from fastapi.requests import Request
+from Backyard.Auth.authn import get_user
+from Backyard.Auth.authz import setup_firebase
+from Backyard.global_models import BackyardUser
 from Factories.route_factory import RouteFactory
 from pydantic import BaseModel, Base64Bytes
 from Interfaces.postgres_connection import PostgresClient
 from Interfaces.postgres_orm import PostgresORM
 
 app = FastAPI()
+setup_firebase()
 
-@app.get('/')
+
+@app.get("/")
 async def root():
-    return {'message': 'hello world'}
+    return {"message": "hello world"}
+
 
 class RequestModel(BaseModel):
     base64_bytes: Base64Bytes
+
 
 async def parse_body(request: Request):
     data: bytes = await request.body()
     return data
 
+
 ParsingDependency = Annotated[str, Depends(parse_body)]
 
 
-@app.post('/api/backyard/v1/{route_endpoint}')
-async def handle_route(route_endpoint, request_body: ParsingDependency):
+@app.post("/api/backyard/v1/{route_endpoint}")
+async def handle_route(
+    route_endpoint,
+    request_body: ParsingDependency,
+    user: BackyardUser = Security(get_user),
+):
     route_handler = RouteFactory.get_handler(route_endpoint, request_body)
     return route_handler.results
 
-@app.on_event('startup')
+
+@app.on_event("startup")
 async def startup():
     app.state.psql_client   = PostgresClient('back_yard', 'lukemason', 'Lukrative11!')
     app.state.psql_orm      = PostgresORM('lukemason', 'Lukrative11!', 'localhost', '5432', 'back_yard')
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     from Interfaces.postgres_connection import PostgresClient
-    psql_client = PostgresClient('db_name', 'username', 'password')
+
+    psql_client = PostgresClient("db_name", "username", "password")
     rows = psql_client.execute_postgres("SELECT * FROM table;")
     for row in rows:
         print(row)

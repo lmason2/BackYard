@@ -45,5 +45,11 @@ class Settings(BaseSettings):
 
     version_filepath: str = "./Makefile"
 
+    user_name = os.getenv("USER_NAME", "dcarr")
+    password = os.getenv("PASSWORD", "")
+    host = os.getenv("HOST", "localhost")
+    port = os.getenv("PORT", "5433")
+    db = os.getenv("DB", "backyard")
+
 
 settings = Settings()
