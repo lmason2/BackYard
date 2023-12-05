@@ -2,7 +2,7 @@ import yaml
 from fastapi.openapi.utils import get_openapi
 from rich import print
 
-from .main import app
+from ..Backyard.main import app
 
 
 def generate_openapi_schema_file():
