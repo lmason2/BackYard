@@ -4,10 +4,11 @@ from fastapi.requests import Request
 from Backyard.Auth.authn import get_user
 from Backyard.Auth.authz import setup_firebase
 from Backyard.global_models import BackyardUser
-from Factories.route_factory import RouteFactory
+from Backyard.Factories.route_factory import RouteFactory
 from pydantic import BaseModel, Base64Bytes
-from Interfaces.postgres_connection import PostgresClient
-from Interfaces.postgres_orm import PostgresORM
+from Backyard.Interfaces.postgres_connection import PostgresClient
+from Backyard.Interfaces.postgres_orm import PostgresORM
+from Backyard.conf import settings
 
 app = FastAPI()
 setup_firebase()
@@ -42,8 +43,8 @@ async def handle_route(
 
 @app.on_event("startup")
 async def startup():
-    app.state.psql_client   = PostgresClient('back_yard', 'lukemason', 'Lukrative11!')
-    app.state.psql_orm      = PostgresORM('lukemason', 'Lukrative11!', 'localhost', '5432', 'back_yard')
+    app.state.psql_client = PostgresClient(settings.db, settings.user_name, settings.password, settings.port)
+    app.state.psql_orm = PostgresORM()
 
 
 if __name__ == "__main__":

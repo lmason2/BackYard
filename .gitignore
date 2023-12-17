@@ -162,3 +162,5 @@ cython_debug/
 # custom ignores
 /benv
 .DS_Store
+.envrc
+service-account.json

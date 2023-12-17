@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# -- makefile --
+
+export REPO_PATH=/Users/dcarr/conapp/Backyard
+
+# -- firebase --
+export FIREBASE_SERVICE_ACCOUNT_VALUE='{
+  "type": "service_account",
+  "project_id": "contructionapp-f2e82",
+  "private_key_id": "f9866ed5cbed426d6271404b6237c56d65a2beeb",
+  "private_key": "{put private key here}",
+  "client_email": "firebase-adminsdk-nritt@contructionapp-f2e82.iam.gserviceaccount.com",
+  "client_id": "117521105842537771537",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-nritt%40contructionapp-f2e82.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}'
+export FIREBASE_SERVICE_ACCOUNT_PATH='service-account.json'
+
+# -- api --
+
+export OPENAPI_URL='/openapi.json'
+# export OPENAPI_URL=''
+
+export DOCS_URL='/docs'
+# export DOCS_URL=''
+
+export ORIGIN_URL='http://localhost:9000'
+export ORIGIN_URL_LOCAL='http://localhost:3000'
+
+# -- redis cache --
+
+#export REDIS_ENABLED=False
+#export REDIS_HOST='localhost'
+#export REDIS_PORT=6379
+#export REDIS_EXPIRATION=300
+
+# -- sqlalchemy --
+
+export POOL_SIZE=20
+export MAX_OVERFLOW=10
+
+# -- db --
+export USER_NAME='dcarr'
+export PASSWORD=''
+export HOST='localhost'
+export PORT=5433
+export DB='backyard'
