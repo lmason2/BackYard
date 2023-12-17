@@ -1,7 +1,8 @@
 import os
+import json
 from typing import Any
 
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -9,8 +10,8 @@ class Settings(BaseSettings):
 
     # provide one or the other with (value takes precedence over path)
     # value is more useful for deployments while path is easier for local development
-    firebase_service_account_value: dict = os.getenv("FIREBASE_SERVICE_ACCOUNT_VALUE")
-    firebase_service_account_path: str = os.getenv("FIREBASE_SERVICE_ACCOUNT_PATH")
+    firebase_service_account_value: dict = os.getenv("FIREBASE_SERVICE_ACCOUNT_VALUE", {})
+    firebase_service_account_path: str = os.getenv("FIREBASE_SERVICE_ACCOUNT_PATH", "")
 
     # tables
 
@@ -32,24 +33,24 @@ class Settings(BaseSettings):
 
     # -- redis cache --
 
-    redis_enabled: bool = os.getenv("REDIS_ENABLED", True)
+    """redis_enabled: bool = os.getenv("REDIS_ENABLED", True)
     redis_host: str = os.getenv("REDIS_HOST")
     redis_port: str = os.getenv("REDIS_PORT")
-    redis_expiration: str = os.getenv("REDIS_EXPIRATION")
+    redis_expiration: str = os.getenv("REDIS_EXPIRATION")"""
 
     # -- sqlalchemy --
 
-    pool_size: int = os.environ["POOL_SIZE"]
+    pool_size: int = os.getenv("POOL_SIZE", 1)
     pool_recycle: int = os.getenv("POOL_RECYCLE", 30)
-    max_overflow: int = os.environ["MAX_OVERFLOW"]
+    max_overflow: int = os.getenv("MAX_OVERFLOW", 10)
 
     version_filepath: str = "./Makefile"
 
-    user_name = os.getenv("USER_NAME", "dcarr")
-    password = os.getenv("PASSWORD", "")
-    host = os.getenv("HOST", "localhost")
-    port = os.getenv("PORT", "5433")
-    db = os.getenv("DB", "backyard")
+    user_name: str = os.getenv("USER_NAME", "dcarr")
+    password: str = os.getenv("PASSWORD", "")
+    host: str = os.getenv("HOST", "localhost")
+    port: str = os.getenv("PORT", "5433")
+    db: str = os.getenv("DB", "backyard")
 
 
 settings = Settings()

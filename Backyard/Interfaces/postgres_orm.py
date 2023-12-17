@@ -3,7 +3,7 @@ import logging
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
-from schemas import User, Role, Document, Photo, Job, Product, Event, Invoice, Base
+from .schemas import User, Role, Document, Photo, Job, Product, Event, Invoice, Base
 from ..conf import settings
 
 host, port, db, user_name, password = settings.host, settings.port, settings.db, settings.user_name, settings.password
